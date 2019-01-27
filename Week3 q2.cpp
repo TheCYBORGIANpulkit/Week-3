@@ -19,18 +19,19 @@ class Circularll{
     //pointer to the first element
     Node* head;
     //constructor to out it null;
-    CircularLL(){
+    Circularll(){
         head = NULL;
     }
 
 
-    int Insert(int val){
+    void Insert(int val){
         //creating a new node
         //temp->data = val;
         Node*temp = new Node(val);
         //check if the list is empty
         if(head == NULL){
             head = temp;
+            head->next = head;
         }
         //in case the list isn't empty
         else{
@@ -38,11 +39,14 @@ class Circularll{
             Node* current  = head;
             while(current->next != head){
                 current = current->next;
+
             }
+             //then link the current to the new
+                current->next = temp;
+
             //link the new node
             temp->next = head;
-            //then link the current to the new
-            current->next = temp;
+
         }
     }
     int CountItems(){
@@ -53,22 +57,31 @@ class Circularll{
             counter = counter->next;
             i++;
         }
-        return i+1;
+        return i;
     }
 
-    void display(){
-     //temporary pointer
-        Node* current  = head;
-        while(current->next != head){
-            current = current->next;
-            cout<< current->data << "->" ;
-        }
-        //ptinting the last element
-        cout<< (current->next)->data << "->" <<endl;
-        cout<< "NULL"<<endl;
+    void Display(){
+         //temporary pointer
+          Node* current  = head;
+          if(current == NULL) {
+                cout << "No elements " << endl;
+                return;
+          }
+          else{
+                Node* current  = head;
+                while(current->next != head){
+                        cout<< current->data << "->" ;
+                    current = current->next;
+
+                }
+
+                //ptinting the last element
+                cout<< current->data << "->" ;
+                cout<< "NULL"<<endl;
+          }
     }
 
-    void InsertAt(int val, int pos){
+    void InsertAt(int pos, int val){
 
         //creating a new node
         //temp->data = val;
@@ -77,18 +90,20 @@ class Circularll{
         //in case of empty list
         if(head == NULL){
             head = temp;
+            head->next = head;
         }
         //in case the list is not empty
         else{
          //temporary pointer
             Node* current  = head;
          //moving to the pos
-         int i=1;
-         while( i < pos){
-            current = current->next;
-         }
-        temp->next = current->next;
-        current->next = temp;
+             int i=1;
+             while( i < (pos-1)){
+                current = current->next;
+                i++;
+             }
+            temp->next = current->next;
+            current->next = temp;
         }
     }
 
@@ -101,9 +116,10 @@ class Circularll{
         else{
              //temporary pointer
             Node* current  = head;
-            while(current->next != head){
+            while((current->next)->next != head){
                 current = current->next;
             }
+
             //storing the last element
              Node*temp = current->next;
              //cutting the link
@@ -118,8 +134,9 @@ class Circularll{
             Node* current  = head;
          //moving to the pos
          int i=1;
-         while( i < pos){
+         while( i < pos-1){
             current = current->next;
+            i++;
          }
         //storing the last element
              Node*temp = current->next;
@@ -135,7 +152,7 @@ int main(){
     for(int i= 1; i < 11; i++){
        csll1.Insert(i);
     }
-    csl11.display();
+    csll1.Display();
 
 
 
@@ -143,25 +160,29 @@ int main(){
     cout<< "please enter the position at which you want to insert and the elements you want to insert respectively: "<<endl;
     cin>>y;
     cin>>x;
-    int a = csl11.CountItems();
-    cout<< a <<endl;
+    int a = csll1.CountItems();
+    cout<< "The number of items in your list is " << a <<endl;
     if(y<=a){
-        csl1.InsertAt(y,x);
+        csll1.InsertAt(y,x);
     }
     else  cout<<"Linked List does not have that many elements "<<endl;
-    csll1.display();
+    csll1.Display();
 
-    csl1.Delete();
-    csl1.display();
+    csll1.Delete();
+
+    csll1.Display();
     cout<< "The number of items in your list is " <<csll1.CountItems()<<endl;
+
     cout<< "Please enter the position at which you want to delete the element at: "<<endl;
-    int z;
+     int z;
     cin>> z;
     if(z<=a){
-        csl1.DeleteAt(z);
+        csll1.DeleteAt(z);
     }
     else  cout<<"Linked List does not have that many elements "<<endl;
-    csl1.display();
+
+    csll1.Display();
+    return 0;
 }
 
 
