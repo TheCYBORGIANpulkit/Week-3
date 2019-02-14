@@ -94,16 +94,17 @@ class Circularll{
         }
         //in case the list is not empty
         else{
-         //temporary pointer
-            Node* current  = head;
-         //moving to the pos
-             int i=1;
-             while( i < (pos-1)){
-                current = current->next;
-                i++;
-             }
-            temp->next = current->next;
-            current->next = temp;
+            
+             //temporary pointer
+                Node* current  = head;
+             //moving to the pos
+                 int i=1;
+                 while( i < (pos-1)){
+                    current = current->next;
+                    i++;
+                 }
+                temp->next = current->next;
+                current->next = temp;
         }
     }
 
@@ -162,8 +163,11 @@ int main(){
     cin>>x;
     int a = csll1.CountItems();
     cout<< "The number of items in your list is " << a <<endl;
-    if(y<=a){
+    if(y<a){
         csll1.InsertAt(y,x);
+    }
+    else if(y = a){
+       csll1.insert(x); 
     }
     else  cout<<"Linked List does not have that many elements "<<endl;
     csll1.Display();
