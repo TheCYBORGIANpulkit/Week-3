@@ -23,7 +23,16 @@ class Circularll{
         head = NULL;
     }
 
-
+    int CountItems(){
+        //temporary pointer
+            Node* counter  = head;
+        int i=1;
+        while(counter->next != head ){
+            counter = counter->next;
+            i++;
+        }
+        return i;
+    }
     void Insert(int val){
         //creating a new node
         //temp->data = val;
@@ -49,16 +58,7 @@ class Circularll{
 
         }
     }
-    int CountItems(){
-        //temporary pointer
-            Node* counter  = head;
-        int i=1;
-        while(counter->next != head ){
-            counter = counter->next;
-            i++;
-        }
-        return i;
-    }
+   
 
     void Display(){
          //temporary pointer
